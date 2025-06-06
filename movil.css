@@ -1,0 +1,1022 @@
+
+/* --- REINICIO BÁSICO Y PROPIEDADES GLOBALES --- */
+/* Aplica box-sizing a todos los elementos para un control más predecible del tamaño */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Incluye padding y borde en el ancho/alto del elemento */
+}
+
+/* Estilos globales para el cuerpo de la página (body) */
+body {
+    margin: 0; /* ¡MUY IMPORTANTE! Elimina cualquier margen predeterminado del navegador en el body, asegurando que el header se pegue a la parte superior. */
+    padding: 0; /* Elimina cualquier padding predeterminado del navegador en el body. */
+    line-height: 1.6; /* Espaciado entre líneas de texto para mejor legibilidad */
+    width: 100vw; /* El body ocupa el 100% del ancho de la ventana del navegador (viewport width) */
+    min-height: 100vh; /* El body ocupa al menos el 100% de la altura de la ventana (viewport height) */
+    box-sizing: border-box; /* Asegura que el box-sizing se aplique a todo el body */
+    display: flex; /* Habilita Flexbox para el layout principal del body */
+    flex-direction: column; /* Apila los elementos hijos (header, nav, main) verticalmente */
+    align-items: center; /* Centra los elementos hijos horizontalmente en el contenedor Flex */
+    background: linear-gradient(to right, #000000, #181818, #05ddf5c8); /* Fondo degradado oscuro con un toque de neón */
+    font-family: "Oswald", sans-serif; /* Fuente principal del sitio */
+    font-weight: 400; /* Peso de la fuente específico para Oswald (se corrigió 'weight' por 400) */
+    font-style: normal;
+}
+
+/* Estilos básicos para los títulos h2 y párrafos p */
+h2, p {
+    font-size: 1.2rem; /* **Tamaño de fuente por defecto para pantallas móviles**, más adecuado para legibilidad */
+    font-weight: bold;
+    color: rgb(255, 255, 255); /* Color de texto blanco */
+    text-shadow: 1px 1px #000000; /* Sombra de texto para mejorar la legibilidad en fondos oscuros */
+}
+
+/* --- ESTILOS PARA EL ENCABEZADO (HEADER) --- */
+header {
+    width: 100%; /* El header ocupa todo el ancho disponible */
+    height: 250px; /* **Altura por defecto para pantallas móviles (Android/iPhone)**, ajustada para ser más compacta */
+    background-image: url('goku1.jpg'); /* Imagen de fondo del encabezado */
+    background-position: center; /* Centra la imagen de fondo */
+    background-size: cover; /* La imagen cubre todo el área del header, recortando si es necesario */
+    background-repeat: no-repeat; /* Evita que la imagen de fondo se repita */
+    display: flex; /* Utiliza Flexbox para centrar el contenido interno (el texto neón) */
+    justify-content: center; /* Centra el contenido horizontalmente */
+    align-items: center; /* Centra el contenido verticalmente */
+    flex-direction: column; /* Apila los elementos internos verticalmente si hay más de uno */
+    position: relative; /* Necesario para posicionar correctamente el pseudo-elemento (capa oscura) */
+    overflow: hidden; /* Oculta cualquier parte de la imagen que desborde */
+    /* No se añaden márgenes ni padding aquí, ya que se pegará al body que ya no tiene espacio */
+}
+
+/* Pseudo-elemento para crear una capa oscura semitransparente sobre la imagen del header */
+header::before {
+    content: ''; /* Contenido vacío necesario para pseudo-elementos */
+    position: absolute; /* Posicionamiento absoluto relativo al header */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.31); /* Negro con 31% de opacidad */
+    z-index: 1; /* Asegura que esta capa esté por encima de la imagen pero por debajo del texto */
+}
+
+/* Contenedor del texto principal dentro del encabezado (la caja de "vidrio") */
+.hero-text-container {
+    position: relative; /* Necesario para que el z-index funcione */
+    z-index: 3; /* Asegura que el texto y el efecto neón estén por encima de la capa oscura */
+    text-align: center; /* Centra el texto dentro del contenedor */
+    color: #eeeeed; /* Color del texto interno */
+    padding: 15px 10px; /* **Padding ajustado para pantallas móviles (más compacto horizontalmente)** */
+    border-radius: 10px; /* Bordes redondeados para el efecto de "vidrio" */
+    background-color: rgba(69, 68, 68, 0.477); /* Fondo semitransparente para el "vidrio" */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque para simular vidrio esmerilado (modern browsers) */
+    -webkit-backdrop-filter: blur(8px); /* Para compatibilidad con navegadores WebKit (Safari) */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra sutil para darle profundidad */
+    overflow: hidden; /* Oculta cualquier contenido que desborde */
+}
+
+/* Estilos para el párrafo dentro del contenedor de texto (.hero-text-container p) */
+.hero-text-container p {
+    font-size: 1em; /* Tamaño de fuente para el párrafo en móviles */
+    margin-top: 10px; /* Espaciado superior para separar del título neón */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra para el texto del párrafo */
+    font-family: Arial, sans-serif; /* Fuente específica para el párrafo */
+}
+
+/* Contenedor del texto neón */
+.neon-container {
+    padding: 5px 0; /* Espaciado interno para el texto neón */
+}
+
+/* Estilos del texto principal con efecto neón */
+.neon-text {
+    font-family: 'Arial Black', Gadget, sans-serif; /* Fuente gruesa para el efecto neón */
+    font-size: 2rem; /* **Tamaño del texto neón por defecto para pantallas móviles (Android/iPhone)** */
+    color: #fff; /* Color base del texto */
+    text-shadow: 0 0 5px #ff005e, 0 0 10px #ff005e, 0 0 20px #ff005e, 0 0 40px #ff005e, 0 0 80px #ff005e; /* Sombra inicial del efecto neón */
+    animation: glow 1.5s infinite alternate; /* Aplica la animación 'glow' para el parpadeo */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+    overflow: hidden; /* Oculta el texto que excede el ancho del contenedor */
+    text-overflow: ellipsis; /* Muestra puntos suspensivos (...) si el texto es demasiado largo para caber */
+}
+
+/* Definición de la animación 'glow' para el efecto neón */
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #ff005e, 0 0 10px #ff005e, 0 0 20px #ff005e, 0 0 40px #ff005e, 0 0 80px #ff005e;
+    }
+    100% {
+        text-shadow: 0 0 10px #00d4ff, 0 0 20px #00d4ff, 0 0 40px #00d4ff, 0 0 80px #00d4ff, 0 0 160px #00d4ff;
+    }
+}
+
+
+/* --- MEDIA QUERIES PARA ADAPTAR A PANTALLAS MÁS GRANDES (TABLETAS Y ESCRITORIO) --- */
+
+/* Ajustes para tabletas (desde 768px de ancho) */
+@media (min-width: 768px) {
+    /* Ajustes de tamaño de fuente general */
+    h2, p {
+        font-size: 1.5rem; /* Aumenta el tamaño del texto general */
+    }
+
+    /* Ajustes para el header */
+    header {
+        height: 350px; /* Aumenta la altura del header en tabletas */
+    }
+
+    /* Ajustes para el contenedor de texto del hero */
+    .hero-text-container {
+        padding: 20px 40px; /* Aumenta el padding del contenedor de texto */
+    }
+    .hero-text-container p {
+        font-size: 1.2em; /* Aumenta el tamaño del párrafo en el hero */
+    }
+
+    /* Ajustes para el texto neón */
+    .neon-text {
+        font-size: 3rem; /* Aumenta el tamaño del texto neón */
+    }
+}
+
+/* Ajustes para escritorios grandes (desde 1024px de ancho) */
+@media (min-width: 1024px) {
+    /* Ajustes de tamaño de fuente general */
+    h2, p {
+        font-size: 2rem; /* Aumenta aún más el tamaño del texto general */
+    }
+
+    /* Ajustes para el header */
+    header {
+        height: 400px; /* Altura para escritorios grandes */
+    }
+
+    /* Ajustes para el párrafo del hero */
+    .hero-text-container p {
+        font-size: 1.6em; /* Tamaño de fuente del párrafo en el hero para escritorios */
+    }
+
+    /* Ajustes para el texto neón */
+    .neon-text {
+        font-size: 5rem; /* Restaura el tamaño original del texto neón para escritorios */
+    }
+}
+
+/* ASTA AQUI COMPROBADO EL HEADER ESTA BIEN ahora bamos por el nav*/
+
+/* --- ESTILOS PARA LA BARRA DE NAVEGACIÓN (NAV) --- */
+
+/* Contenedor principal de la navegación */
+.nav-fixed-container {
+    background-color: rgba(0, 0, 0, 0.138); /* Fondo oscuro semitransparente para el nav */
+    padding: 15px 0; /* Padding vertical para la barra de navegación en móviles */
+    width: 100%; /* El nav ocupa todo el ancho */
+    left: 0; /* Alinea el nav a la izquierda */
+    z-index: 100; /* Asegura que el nav esté por encima de otros elementos al hacer scroll */
+    box-shadow: 0 2px 10px rgba(6, 245, 229, 0.645); /* Sombra sutil debajo del nav */
+
+    /* Comportamiento STICKY: El nav se desplazará con el contenido hasta que alcance 'top: 0',
+       momento en el que se fijará en la parte superior de la ventana del navegador. */
+    position: sticky;
+    top: 0; /* Se pega a la parte superior de la ventana (0px desde el borde superior) */
+}
+
+/* Lista de elementos de navegación (ul) */
+.nav-list {
+    list-style: none; /* Quita los puntos de la lista por defecto */
+    margin: 0; /* Elimina márgenes por defecto */
+    padding: 0; /* Elimina padding por defecto */
+    display: flex; /* Habilita Flexbox para alinear los elementos de la lista horizontalmente */
+    justify-content: space-around; /* Distribuye los ítems uniformemente con espacio alrededor de ellos */
+    align-items: center; /* Centra los elementos verticalmente en el contenedor Flex */
+    width: 100%; /* Permite que `space-around` funcione en todo el ancho disponible */
+    max-width: 600px; /* Limita el ancho máximo de la lista en pantallas muy grandes para evitar que los botones se estiren demasiado */
+    margin-left: auto; /* Centra la lista horizontalmente cuando `max-width` es menor que el 100% */
+    margin-right: auto; /* Centra la lista horizontalmente */
+}
+
+/* Cada elemento de la lista de navegación (li) */
+.nav-list li {
+    flex-grow: 1; /* Permite que cada elemento `li` crezca para ocupar el espacio disponible, distribuyéndolos equitativamente */
+    text-align: center; /* Centra el botón (enlace) dentro de cada `li` */
+}
+
+/* Estilos base para los botones de navegación (los enlaces <a> con iconos) */
+.btn {
+    position: relative; /* Necesario para el efecto de pulso neón */
+    padding: 0.8rem 1.2rem; /* **Padding ajustado para pantallas móviles (Android/iPhone) para botones cuadrados y compactos** */
+    font-size: 1.2rem; /* **Tamaño de fuente de base para los botones en móviles** */
+    font-weight: 600;
+    color: #04fcfc; /* Color del texto/icono del botón */
+    background: none; /* Sin fondo predefinido */
+    border-radius: 0; /* Asegura que los botones sean cuadrados por defecto */
+    cursor: pointer; /* Cambia el cursor a puntero al pasar por encima */
+    /* overflow: hidden; */ /* ¡Esta propiedad fue eliminada para permitir que la animación de pulso sea visible! */
+    transition: all 0.3s ease; /* Transición suave para todos los cambios de estilo */
+    min-width: unset; /* Elimina cualquier ancho mínimo fijo para que Flexbox pueda ajustar el tamaño */
+    z-index: 1; /* Asegura que el botón esté por encima de su pseudo-elemento de pulso */
+    display: inline-flex; /* Permite alinear el icono y texto internamente */
+    justify-content: center; /* Centra el contenido (icono) horizontalmente dentro del botón */
+    align-items: center; /* Centra el contenido (icono) verticalmente dentro del botón */
+    text-decoration: none; /* Quita el subrayado de los enlaces */
+}
+
+/* Estilos para el icono dentro del botón */
+.btn .icon {
+    font-size: 2rem; /* **Tamaño específico para los iconos de Ionicon en móviles**, haciendo que sean prominentes */
+    display: flex; /* Asegura que el icono se centre si tiene un contenedor */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Color del texto/icono del botón al pasar el ratón por encima */
+.btn:hover {
+    color: #ffffff;
+}
+
+/* Estilos específicos para el efecto neón en los botones */
+.neon-pulse {
+    background: #000000; /* Fondo del botón con efecto neón */
+    border: 2px solid rgb(0, 255, 255); /* Borde neón */
+    box-shadow: 0 0 10px rgba(2, 237, 245, 0.45); /* Sombra neón */
+    /* overflow: hidden; */ /* ¡Esta propiedad fue eliminada para permitir que la animación de pulso sea visible! */
+    border-radius: 5px; /* **Bordes ligeramente redondeados para la forma cuadrada de los iconos en móvil** */
+}
+
+/* Pseudo-elementos para el efecto de pulso neón */
+.neon-pulse::before,
+.neon-pulse::after {
+    content: ""; /* Contenido vacío necesario */
+    position: absolute; /* Posicionamiento absoluto relativo al botón */
+    inset: -4px; /* El pulso se extiende 4px fuera del borde del botón */
+    border: 2px solid rgb(0, 255, 234); /* Color del borde del pulso */
+    border-radius: inherit; /* Hereda el border-radius del padre (.neon-pulse), manteniendo la forma cuadrada/redondeada */
+    animation: pulseOut 2s ease-in-out infinite; /* Animación de pulso */
+    opacity: 0; /* Inicialmente transparente */
+    z-index: 0; /* Asegura que estén detrás del icono principal del botón */
+}
+
+/* Retraso para el segundo pulso */
+.neon-pulse::after {
+    animation-delay: 1s;
+}
+
+/* Definición de la animación de pulso */
+@keyframes pulseOut {
+    0% { transform: scale(1); opacity: 1; } /* Inicio de la animación: tamaño normal, opaco */
+    100% { transform: scale(1.5); opacity: 0; } /* Fin de la animación: más grande, transparente */
+}
+
+
+/* --- MEDIA QUERIES PARA ADAPTAR A PANTALLAS MÁS GRANDES (TABLETAS Y ESCRITORIO) --- */
+
+/* Ajustes para tabletas y pantallas de laptop pequeñas (desde 768px de ancho) */
+@media (min-width: 768px) {
+    /* Ajustes para el nav (se mantiene sticky) */
+    .nav-fixed-container {
+        padding: 15px 0; /* Aumenta el padding vertical del nav en tabletas */
+    }
+
+    /* Ajustes para la lista de navegación */
+    .nav-list {
+        justify-content: center; /* Centra los elementos del nav (en lugar de space-around) */
+        gap: 30px; /* Más espacio entre los elementos de la lista en tabletas */
+    }
+
+    /* Ajustes para los botones de navegación */
+    .btn {
+        padding: 1rem 2rem; /* **Padding del botón ajustado para tabletas** */
+        font-size: 1.4rem; /* **Tamaño de fuente del botón ajustado para tabletas** */
+    }
+    .btn .icon {
+        font-size: 2.2rem; /* **Tamaño del icono de Ionicon en tabletas** */
+    }
+
+    /* Ajustes para el efecto neón en los botones (los mantiene cuadrados) */
+    .neon-pulse {
+        border-radius: 8px; /* Ligeramente más redondeado para el cuadrado en tabletas */
+    }
+}
+
+/* Ajustes para escritorios grandes (desde 1024px de ancho) */
+@media (min-width: 1024px) {
+    /* Ajustes para la lista de navegación */
+    .nav-list {
+        gap: 40px; /* Más espacio entre los elementos en escritorios */
+    }
+
+    /* Ajustes para los botones de navegación */
+    .btn {
+        padding: 1.2rem 2.5rem; /* **Padding del botón para escritorios más grandes** */
+        font-size: 1.6rem; /* **Tamaño de fuente del botón para escritorios más grandes** */
+    }
+    .btn .icon {
+        font-size: 2.5rem; /* **Tamaño del icono de Ionicon en escritorios más grandes** */
+    }
+
+    /* Ajustes para el efecto neón en los botones (los mantiene cuadrados) */
+    .neon-pulse {
+        border-radius: 10px; /* Un poco más de redondeo para los cuadrados en escritorios */
+    }
+}
+
+
+
+
+
+
+
+.container {
+    margin-top: 20px;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #000000, #06daea, #000000c8);
+    position: relative;
+    width: 90%;
+    width: 350px;
+    height: 250px;
+    text-align: center;
+    font-size: calc(14px + 0.5vw);
+    font-weight: bold;
+    border: 5px solid;
+    animation: ledAnimation 2s linear infinite;
+    overflow: hidden;
+    padding: 20px;
+}
+
+.parrafo {
+    color: white;
+}
+
+.circle {
+    box-shadow: 2px 3px rgb(109, 109, 109);
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: rgb(243, 4, 4);
+    border-radius: 50%;
+    animation: moveAround 3s linear infinite, changeColor 3s linear infinite;
+}
+
+/* Animaciones */
+@keyframes moveAround {
+    0% { top: 10px; left: 50%; }
+    25% { top: 50%; left: 90%; }
+    50% { top: 90%; left: 50%; }
+    75% { top: 50%; left: 10%; }
+    100% { top: 10px; left: 50%; }
+}
+
+@keyframes changeColor {
+    0% { background-color: rgb(255, 255, 255); }
+    25% { background-color: rgb(255, 0, 0); }
+    50% { background-color: rgb(45, 230, 32); }
+    75% { background-color: rgb(0, 255, 204); }
+    100% { background-color: rgb(255, 255, 255); }
+}
+
+@keyframes ledAnimation {
+    0% { border-color: rgb(0, 89, 255) transparent transparent transparent; }
+    25% { border-color: transparent rgb(255, 64, 0) transparent transparent; }
+    50% { border-color: transparent transparent rgb(45, 230, 32) transparent; }
+    75% { border-color: transparent transparent transparent rgb(250, 236, 32); }
+    100% { border-color: blue transparent transparent transparent; }
+}
+
+/* Ajustes para móviles */
+@media (max-width: 768px) {
+    .container {
+        height: 180px;
+        font-size: 14px;
+        border-width: 4px;
+    }
+
+    .circle {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+ /*
+ * MOBILE FIRST - Estilos base para dispositivos móviles
+ * Se han ajustado los overlays y la galería para móvil.
+ */
+
+/* --- FOOTER --- */
+footer {
+    font-size: 1.2rem;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #000000;
+    color: #04fcfc;
+    text-shadow: 1px 1px rgb(255, 255, 255);
+}
+
+/* --- OVERLAY CONTENT (páginas emergentes) --- */
+.overlay-content {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #000000, #04c8f9, #000000c8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(0.9);
+    transition: visibility 0.4s ease-in-out, opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
+
+.overlay-content.active {
+    visibility: visible;
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* --- CONTENT BOX (caja de contenido dentro del overlay) --- */
+.content-box {
+    background: linear-gradient(to bottom, #000000, #04c8f9, #000000c8);
+    color: #f0f0f0;
+    padding: 20px; /* Reducir padding para móviles */
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.982);
+    /* Ajustes para móviles: maximizar el espacio en pantalla */
+    max-width: 95%; /* Permitir que ocupe más ancho en móviles */
+    width: 95%; /* Ajuste a 95% para móviles */
+    height: 90%; /* Darle altura para que se sienta más "completo" */
+    overflow-y: auto; /* Para que el contenido sea scrollable si excede la altura */
+    text-align: center;
+    position: relative;
+    transform: translateY(0);
+    transition: transform 0.4s ease-in-out;
+    margin: 10px; /* Reducir margen para pegar más a los bordes */
+    box-sizing: border-box; /* Incluir padding en el width/height total */
+}
+
+/* Estilos para los títulos, párrafos y listas dentro de los contenedores */
+.content-box h2 {
+    color: #00e676;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+}
+
+.content-box p {
+    line-height: 1.5;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.content-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0;
+}
+
+.content-box ul li {
+    margin-bottom: 5px;
+    color: #a0a0a0;
+    font-size: 0.95rem;
+}
+
+.content-box img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* --- BOTÓN DE CERRAR --- */
+.close-content-btn {
+    background-color: #e31428;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 0.9em;
+    transition: background-color 0.3s ease;
+}
+
+.close-content-btn:hover {
+    background-color: #ff0019;
+    color: #000000;
+}
+
+/* --- GALERÍA DE IMÁGENES --- */
+#titulo-galeria {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #04c8f9;
+}
+
+.galeria {
+    display: grid;
+    /* FORZADO a 2 columnas de 1fr para móviles, como pediste */
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas iguales para móviles */
+    gap: 15px;
+    max-width: 900px; /* Esto se ajustará con media queries para pantallas más grandes */
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.galeria img {
+    width: 100%;
+    height: 180px; /* Ajustar altura para que quepan bien de dos en dos */
+    object-fit: cover;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgb(31, 226, 197);
+    transition: transform 0.2s ease-in-out;
+}
+
+.galeria img:hover {
+    transform: scale(1.03);
+}
+
+/* --- MODAL --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+}
+
+.modal-contenido {
+    background: linear-gradient(to right, #000000, #000000, #05eff3);
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    position: relative;
+    max-width: 95%; /* Más ancho en móviles */
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    margin: 15px;
+    box-sizing: border-box; /* Incluir padding en el width/height total */
+}
+
+.modal-contenido img {
+    max-width: 100%;
+    max-height: 60vh;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.cerrar {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 50px;
+    background: transparent;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.cerrar:hover {
+    transform: rotate(90deg);
+    color: #f90101;
+}
+
+/* --- CARRITO DE COMPRAS --- */
+#titulo-carrito {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    color: #00eeff;
+}
+
+#contenido-carrito {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 95%; /* Adaptar a móviles */
+    margin: 20px auto;
+    padding: 20px;
+    background: linear-gradient(to bottom, #000000, #00eeff, #000000c8);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* Incluir padding en el width total */
+}
+
+#img-carrito {
+    max-width: 90%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.opciones label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    color: #333;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.opciones input[type="text"],
+.opciones select {
+    padding: 10px;
+    border: 2px solid #01fffb;
+    border-radius: 8px;
+    margin-top: 5px;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #d9d9d9;
+    transition: all 0.3s ease-in-out;
+}
+
+.opciones input[type="text"]:focus,
+.opciones select:focus {
+    border-color: #ff7700;
+    box-shadow: 0 0 8px rgba(255, 111, 97, 0.5);
+}
+
+.opciones select {
+    appearance: none;
+    background-image: linear-gradient(to right, #000000, #000000d7);
+    color: rgb(237, 236, 236);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.opciones input[type="text"]:hover,
+.opciones select:hover {
+    background-color: #fff;
+    border-color: #333;
+}
+
+.opciones input[type="text"],
+.opciones select {
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ocultar el contenido del carrito por defecto y mostrarlo con JS */
+body:not(.carrito-activo) #contenido-carrito,
+body:not(.carrito-activo) #volver-galeria-wrapper {
+    display: none;
+}
+
+/* Estilos para la página de la galería (cuando es visible) */
+body.carrito-activo .galeria,
+body.carrito-activo #titulo-galeria {
+    display: none;
+}
+
+
+/* --- BOTONES ELÉCTRICOS (voltage-button) --- */
+.voltage-button {
+    position: relative;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex; /* Para centrar el botón */
+    justify-content: center; /* Centrar el botón */
+}
+
+.voltage-button button {
+    color: white;
+    background: #0418ad;
+    padding: 1.2rem 2.5rem 1.4rem 2.5rem;
+    border-radius: 5rem;
+    border: 3px solid #0422b6;
+    font-size: 1.2rem;
+    line-height: 1em;
+    letter-spacing: 0.05em;
+    transition: background 0.3s;
+    font-family: Arial, sans-serif;
+    white-space: nowrap;
+    box-sizing: border-box;
+    width: 100%; /* Ocupa el 100% del contenedor voltage-button */
+    max-width: 280px; /* Un poco menos ancho para móviles para que no se pegue tanto */
+}
+
+.voltage-button button:hover {
+    cursor: pointer;
+    background: #0F1C53;
+    + svg[filter="url('#glow1')"],
+    + svg[filter="url('#glow2')"],
+    + svg[filter="url('#glow3')"],
+    + svg[filter="url('#glow1')"] + .dots,
+    + svg[filter="url('#glow2')"] + .dots,
+    + svg[filter="url('#glow3')"] + .dots {
+        opacity: 1;
+    }
+}
+
+.voltage-button svg {
+    display: block;
+    position: absolute;
+    top: -0.5em;
+    left: -0.2em;
+    width: calc(100% + 0.4em);
+    height: calc(100% + 1em);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s;
+    transition-delay: 0.1s;
+
+    path {
+        stroke-dasharray: 100;
+        &.line-1 {
+            stroke: #f6de8d;
+            stroke-dashoffset: 0;
+            animation: spark-1 3s linear infinite;
+        }
+        &.line-2 {
+            stroke: #6bfeff;
+            stroke-dashoffset: 500;
+            animation: spark-2 3s linear infinite;
+        }
+    }
+}
+
+.voltage-button .dots {
+    opacity: 0;
+    transition: opacity 0.3s;
+    transition-delay: 0.4s;
+
+    .dot {
+        width: 0.8rem;
+        height: 0.8rem;
+        background: white;
+        border-radius: 100%;
+        position: absolute;
+        opacity: 0;
+    }
+    .dot-1 {
+        top: 0;
+        left: 20%;
+        animation: fly-up 3s linear infinite;
+    }
+    .dot-2 {
+        top: 0;
+        left: 55%;
+        animation: fly-up 3s linear infinite;
+        animation-delay: 0.5s;
+    }
+    .dot-3 {
+        top: 0;
+        left: 80%;
+        animation: fly-up 3s linear infinite;
+        animation-delay: 1s;
+    }
+    .dot-4 {
+        bottom: 0;
+        left: 30%;
+        animation: fly-down 3s linear infinite;
+        animation-delay: 2.5s;
+    }
+    .dot-5 {
+        bottom: 0;
+        left: 65%;
+        animation: fly-down 3s linear infinite;
+        animation-delay: 1.5s;
+    }
+}
+
+/* Animaciones (sin cambios aquí, ya estaban bien) */
+@keyframes spark-1 {
+    to {
+        stroke-dashoffset: -1000;
+    }
+}
+@keyframes spark-2 {
+    to {
+        stroke-dashoffset: -500;
+    }
+}
+@keyframes fly-up {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.2);
+    }
+    5% {
+        opacity: 1;
+        transform: translateY(-1.2rem) scale(0.4);
+    }
+    10%,
+    100% {
+        opacity: 0;
+        transform: translateY(-2.5rem) scale(0.2);
+    }
+}
+@keyframes fly-down {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.2);
+    }
+    5% {
+        opacity: 1;
+        transform: translateY(1.2rem) scale(0.4);
+    }
+    10%,
+    100% {
+        opacity: 0;
+        transform: translateY(2.5rem) scale(0.2);
+    }
+}
+
+
+/* --- MEDIA QUERIES --- */
+
+/* PARA TABLETS (min-width: 768px) */
+@media (min-width: 768px) {
+    footer {
+        padding: 30px;
+        font-size: 1.5rem;
+    }
+
+    .content-box {
+        padding: 30px;
+        max-width: 600px; /* Vuelve a un ancho más controlado */
+        width: 90%; /* Asegura que no se estire demasiado */
+        height: auto; /* Altura automática en pantallas más grandes */
+        margin: 20px; /* Margen normal */
+    }
+
+    .content-box h2 {
+        font-size: 2.2rem;
+    }
+
+    .content-box p {
+        font-size: 1.1rem;
+    }
+
+    .content-box ul li {
+        font-size: 1rem;
+    }
+
+    .close-content-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .galeria {
+        /* Para tablets, mantenemos el grid de 2 columnas o auto-fit con un minmax más grande */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
+
+    .galeria img {
+        height: 250px;
+    }
+
+    .modal-contenido {
+        padding: 30px;
+        max-width: 80%;
+        max-height: 80vh;
+        margin: 15px;
+    }
+
+    .modal-contenido img {
+        max-height: 65vh;
+    }
+
+    .cerrar {
+        font-size: 60px;
+    }
+
+    #contenido-carrito {
+        max-width: 600px;
+        padding: 25px;
+    }
+
+    .opciones label {
+        font-size: 1.1rem;
+    }
+
+    .opciones input[type="text"],
+    .opciones select {
+        padding: 12px;
+        font-size: 1.1rem;
+    }
+
+    .voltage-button button {
+        padding: 1.6rem 5rem 1.8rem 5rem;
+        font-size: 1.8rem;
+        max-width: none; /* Eliminar el max-width para que se adapte al contenedor padre */
+    }
+    /* Estilos específicos para los botones dentro del modal y el carrito en tablets */
+    .modal-contenido .voltage-button button,
+    #contenido-carrito .voltage-button button {
+        font-size: 1.5rem;
+        padding: 1rem 3rem 1.2rem 3rem;
+    }
+
+    .voltage-button svg {
+        top: -0.75em;
+        left: -0.25em;
+        width: calc(100% + 0.5em);
+        height: calc(100% + 1.5em);
+    }
+    .voltage-button .dots .dot {
+        width: 1rem;
+        height: 1rem;
+    }
+    @keyframes fly-up {
+        5% { transform: translateY(-1.5rem) scale(0.4); }
+        10%,100%{ transform: translateY(-3rem) scale(0.2); }
+    }
+    @keyframes fly-down {
+        5% { transform: translateY(1.5rem) scale(0.4); }
+        10%,100%{ transform: translateY(3rem) scale(0.2); }
+    }
+}
+
+/* PARA COMPUTADORAS (min-width: 1024px) */
+@media (min-width: 1024px) {
+    footer {
+        padding: 50px;
+        font-size: 1.8rem;
+    }
+
+    .content-box {
+        max-width: 700px;
+    }
+
+    .content-box h2 {
+        font-size: 2.5rem;
+    }
+
+    .content-box p {
+        font-size: 1.2rem;
+    }
+
+    .content-box ul li {
+        font-size: 1.1rem;
+    }
+
+    .galeria {
+        /* Para computadoras, 3 o 4 columnas dependiendo del minmax */
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Un poco más grande para computadoras */
+        gap: 25px;
+    }
+
+    .galeria img {
+        height: 300px;
+    }
+
+    .modal-contenido {
+        max-width: 70%;
+        max-height: 75vh;
+    }
+
+    .modal-contenido img {
+        max-height: 60vh;
+    }
+
+    .cerrar {
+        font-size: 80px;
+    }
+
+    #contenido-carrito {
+        max-width: 700px;
+    }
+    
+    .opciones label {
+        font-size: 1.2rem;
+    }
+
+    .opciones input[type="text"],
+    .opciones select {
+        padding: 15px;
+        font-size: 1.2rem;
+    }
+}
